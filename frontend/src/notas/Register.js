@@ -5,6 +5,8 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+
 
   const handleRegister = async () => {
     if (!email || !password) {
@@ -23,6 +25,7 @@ const Register = () => {
         password,
       });
       console.log(response.data); // Maneja la respuesta según sea necesario
+      setSuccess(true); 
     } catch (error) {
       console.error('Error al registrar:', error);
       setError(error.response.data.message); // Mostrar el mensaje de error del servidor
@@ -52,6 +55,9 @@ const Register = () => {
       />
       <button onClick={handleRegister}>Register</button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
+      {success && (
+  <div style={{ color: 'green' }}>Usuario creado correctamente! <button onClick={() => window.location.href='/login'}>Ir al login</button></div>
+)}
     </div>
   );
 };

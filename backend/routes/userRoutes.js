@@ -1,12 +1,13 @@
 import express from 'express';
-import { registerUser } from '../controllers/UserController.js'; // Añade la extensión .js al final de UserController
+import { registerUser, loginUser } from '../controllers/UserController.js'; // Importa loginUser desde UserController
 
 const router = express.Router();
 
 // Ruta para registrar un nuevo usuario
 router.post('/register', registerUser);
 
-// Ruta para obtener el perfil de usuario
+// Nueva ruta para iniciar sesión
+router.post('/login', loginUser);
 
 // Otras rutas para actualizar, eliminar usuarios, etc.
 
