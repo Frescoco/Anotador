@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Importa Link
+import { Link } from 'react-router-dom';
 
 const URI = 'http://localhost:8000/notas/';
 
@@ -40,6 +40,7 @@ const ShowNotasArchivadas = () => {
             <li key={nota._id}>
               <h2>{nota.title}</h2>
               <p>{nota.content}</p>
+              <p>Fecha de creación: {new Date(nota.createdAt).toLocaleString()}</p> {/* Mostrar la fecha de creación */}
               <button onClick={() => recuperarNota(nota._id)}>Recuperar</button> {/* Botón para recuperar la nota */}
             </li>
           ))

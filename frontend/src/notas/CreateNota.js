@@ -13,7 +13,13 @@ const CompCreateNota = () => {
     // Procedimiento para guardar la nota
     const store = async (e) => {
         e.preventDefault()
-        await axios.post(URI, { title: title, content: content, importante: importante }) // Envía el estado de la casilla de verificación al backend
+        const nuevaNota = {
+            title: title,
+            content: content,
+            importante: importante,
+            createdAt: new Date().toISOString() // Obtener la fecha y hora actual en formato ISO
+        };
+        await axios.post(URI, nuevaNota); // Envía la nota con la fecha de creación al backend
         navigate('/')
     }   
 

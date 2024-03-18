@@ -78,31 +78,35 @@ const CompShowNotas = () => {
                             <tr>
                                 <th>Title</th>
                                 <th>Content</th>
+                                <th>Creation Date</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            { notasFiltradas.length === 0 && mostrarImportantes && (
+                            {notasFiltradas.length === 0 ? (
                                 <tr>
-                                    <td colSpan="3">No hay notas importantes</td>
+                                    <td colSpan="4">No hay notas</td>
                                 </tr>
+                            ) : (
+                                notasFiltradas.map((nota, index) => (
+                                    <tr key={index}>
+                                        <td>{nota.title}</td>
+                                        <td>{nota.content}</td>
+                                        <td>{new Date(nota.createdAt).toLocaleString()}</td>
+                                        
+                                        <td>
+                                            {nota.importante ? (
+                                                <button onClick={() => toggleImportante(nota._id, nota.importante)} className='btn btn-warning'><i className="fas fa-star"></i> Quitar Importante</button>
+                                            ) : (
+                                                <button onClick={() => toggleImportante(nota._id, nota.importante)} className='btn btn-success'><i className="far fa-star"></i> Marcar Importante</button>
+                                            )}
+                                            <Link to={`/edit/${nota._id}`} className='btn btn-info'><i className="fas fa-edit"></i></Link>
+                                            <button onClick={() => archiveNota(nota._id)} className='btn btn-warning'><i className="fas fa-archive"></i> Archivar</button>
+                                            <button onClick={() => deleteNota(nota._id)} className='btn btn-danger'><i className="fas fa-trash-alt"></i> Eliminar</button>
+                                        </td>
+                                    </tr>
+                                ))
                             )}
-                            { notasFiltradas.map((nota, index) => (
-                                <tr key={index}>
-                                    <td>{nota.title}</td>
-                                    <td>{nota.content}</td>
-                                    <td>
-                                        {nota.importante ? (
-                                            <button onClick={() => toggleImportante(nota._id, nota.importante)} className='btn btn-warning'><i className="fas fa-star"></i> Quitar Importante</button>
-                                        ) : (
-                                            <button onClick={() => toggleImportante(nota._id, nota.importante)} className='btn btn-success'><i className="far fa-star"></i> Marcar Importante</button>
-                                        )}
-                                        <Link to={`/edit/${nota._id}`} className='btn btn-info'><i className="fas fa-edit"></i></Link>
-                                        <button onClick={() => archiveNota(nota._id)} className='btn btn-warning'><i className="fas fa-archive"></i> Archivar</button>
-                                        <button onClick={() => deleteNota(nota._id)} className='btn btn-danger'><i className="fas fa-trash-alt"></i> Eliminar</button>
-                                    </td>
-                                </tr>
-                            ))}
                         </tbody>
                     </table>
                 </div>

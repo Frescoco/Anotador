@@ -28,9 +28,15 @@ export const getNota = async (req, res) => {
 };
 
 // Crear una nota
+
 export const createNota = async (req, res) => {
     try {
-        await NotaModel.create(req.body);
+        // Agregar la fecha de creación antes de crear la nota
+        const nuevaNotaData = {
+            ...req.body,
+            createdAt: new Date() // Obtener la fecha y hora actual
+        };
+        await NotaModel.create(nuevaNotaData);
         res.status(201).json({ message: "Nota creada correctamente" });
     } catch (error) {
         res.status(400).json({ message: error.message });
