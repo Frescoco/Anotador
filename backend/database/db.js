@@ -6,7 +6,7 @@ mongoose.connect(url, {
   useUnifiedTopology: true
 });
 
-mongoose.set('strictQuery', false); // Configuración de strictQuery
+mongoose.set('strictQuery', undefined); // Configuración de strictQuery
 
 const db = mongoose.connection;
 
