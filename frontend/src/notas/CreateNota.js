@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const URI = 'http://localhost:8000/notas/';
@@ -8,16 +8,22 @@ const CompCreateNota = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [importante, setImportante] = useState(false);
-    const [retrasada, setRetrasada] = useState(false); // Nuevo estado para la casilla de verificación de notas retrasadas
+    const [retrasada, setRetrasada] = useState(false); 
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const navigate = useNavigate();
-
+    useEffect(() => {
+        const email = localStorage.getItem('loggedInEmail');
+        if (email) {
+            setIsLoggedIn(true);
+        }
+    }, []); 
     const store = async (e) => {
         e.preventDefault();
         const nuevaNota = {
             title: title,
             content: content,
             importante: importante,
-            retrasada: retrasada, // Agregar la propiedad retrasada al objeto nuevaNota
+            retrasada: retrasada, 
             createdAt: new Date().toISOString()
         };
         await axios.post(URI, nuevaNota);
@@ -26,7 +32,7 @@ const CompCreateNota = () => {
 
     return (
         <div>
-            <h3>Create POST</h3>
+            <h3>Crear Notas</h3>
             <form onSubmit={store}>
                 <div className='mb-3'>
                     <label className='form-label'>Title</label>
@@ -53,6 +59,7 @@ const CompCreateNota = () => {
                         checked={importante}
                         onChange={(e) => setImportante(e.target.checked)}
                         id='importanteCheckbox'
+                        disabled={!isLoggedIn} 
                     />
                     <label className='form-check-label' htmlFor='importanteCheckbox'>
                         Importante
@@ -65,6 +72,7 @@ const CompCreateNota = () => {
                         checked={retrasada}
                         onChange={(e) => setRetrasada(e.target.checked)}
                         id='retrasadaCheckbox'
+                        disabled={!isLoggedIn} 
                     />
                     <label className='form-check-label' htmlFor='retrasadaCheckbox'>
                         Retrasada
@@ -75,5 +83,7 @@ const CompCreateNota = () => {
         </div>
     );
 };
+
+
 
 export default CompCreateNota;

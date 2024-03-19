@@ -11,13 +11,11 @@ const Login = () => {
       return;
     }
   
-    // Verificar si el email tiene un formato válido
     if (!validateEmail(email)) {
       setError('Por favor, ingresa un correo electrónico válido.');
       return;
     }
-  
-    // Verificar si el usuario existe en el almacenamiento local
+
     const storedEmail = localStorage.getItem('registeredEmail');
     const storedPassword = localStorage.getItem('registeredPassword');
     
@@ -26,18 +24,15 @@ const Login = () => {
       return;
     }
   
-    // Simulando inicio de sesión exitoso
     localStorage.setItem('loggedInEmail', email);
     window.location.href = '/';
   };
 
-  // Función para validar el formato del correo electrónico
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)*$/;
     return emailRegex.test(email);
   };
 
-  // Si no se ha iniciado sesión, muestra el formulario de inicio de sesión
   return (
     <div>
       <h2>Login</h2>

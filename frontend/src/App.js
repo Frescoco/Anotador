@@ -4,9 +4,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import CompShowNotas from './notas/ShowNotas';
 import CompCreateNota from './notas/CreateNota';
 import CompEditNota from './notas/EditNota';
-import ShowNotasArchivadas from '../src/notas/ShowNotasArchivas'; // Importa el nuevo componente
-import Register from './notas/Register'; // Importa el componente de registro
-import Login from './notas/Login'; // Importa el componente de login
+import ShowNotasArchivadas from '../src/notas/ShowNotasArchivas'; 
+import Register from './notas/Register'; 
+import Login from './notas/Login'; 
 import User from './notas/User';
 
 function App() {
@@ -17,10 +17,10 @@ function App() {
           <Route path="/" element={<CompShowNotas />} />
           <Route path="/create" element={<CompCreateNota />} />
           <Route path="/edit/:id" element={<CompEditNota />} />
-          <Route path="/archivadas" element={<ShowNotasArchivadas />} /> {/* Nueva ruta para notas archivadas */}
-          <Route path="/register" element={<Register />} /> {/* Nueva ruta para el registro */}
-          <Route path="/login" element={<Login />} /> {/* Nueva ruta para el login */}
-          <Route path="/user" element={<User />} /> {/* Nueva ruta para el login */}
+          <Route path="/archivadas" element={<ShowNotasArchivadas />} />
+          <Route path="/register" element={<Register />} /> 
+          <Route path="/login" element={<Login />} /> 
+          <Route path="/user" element={<User />} /> 
         </Routes>
       </BrowserRouter>
     </div>

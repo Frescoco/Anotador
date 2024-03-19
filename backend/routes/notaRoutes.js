@@ -12,4 +12,4 @@ router.put('/archive/:id', archiveNota);
 router.put('/unarchive/:id', unarchiveNota);
 router.get('/archivadas', getNotasArchivadas);
 
-export default router; // Asegúrate de exportar el enrutador como valor predeterminado
+export default router; 

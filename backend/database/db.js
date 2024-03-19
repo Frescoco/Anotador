@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
-const url = 'mongodb://127.0.0.1:27017/Nota'; // Cambio a IPv4
+const url = 'mongodb://127.0.0.1:27017/Nota';
 mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
 
-mongoose.set('strictQuery', undefined); // Configuración de strictQuery
+mongoose.set('strictQuery', undefined); 
 
 const db = mongoose.connection;
 

@@ -5,9 +5,9 @@ const notaSchema = new Schema(
   {
     title: { type: String },
     content: { type: String },
-    createdAt: { type: Date, default: Date.now }, // Agregar el campo createdAt con valor predeterminado Date.now
-    archived: { type: Boolean, default: false }, // Agregar el campo archived con valor predeterminado false
-    importante: { type: Boolean, default: false }, // Agregar el campo importante con valor predeterminado false
+    createdAt: { type: Date, default: Date.now }, 
+    archived: { type: Boolean, default: false },
+    importante: { type: Boolean, default: false }, 
     retrasada: { type: Boolean, default: false } 
   },
 

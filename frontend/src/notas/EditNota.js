@@ -10,7 +10,6 @@ const CompEditNota = () => {
     const navigate = useNavigate();
     const { id } = useParams();
 
-    // Procedimiento para actualizar
     const update = async (e) => {
         e.preventDefault();
         await axios.put(`${URI}${id}`, {
@@ -20,7 +19,6 @@ const CompEditNota = () => {
         navigate('/');
     };
 
-    // Procedimiento para cancelar la edición y regresar a la página principal
     const cancel = () => {
         navigate('/');
     };

@@ -9,23 +9,20 @@ const Register = () => {
   const handleRegister = () => {
     if (!email || !password) {
       setError('Por favor, completa todos los campos.');
-      setSuccess(false); // Restablece el éxito si hay errores
+      setSuccess(false); 
       return;
     }
 
-    // Validar el formato del correo electrónico usando una expresión regular
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)*$/;
     if (!emailRegex.test(email)) {
       setError('Por favor, ingresa un correo electrónico válido.');
-      setSuccess(false); // Restablece el éxito si hay errores
+      setSuccess(false); 
       return;
     }
 
-    // Almacenar el usuario y la contraseña en localStorage
     localStorage.setItem('registeredEmail', email);
     localStorage.setItem('registeredPassword', password);
 
-    // Simulando registro exitoso
     setSuccess(true);
   };
 

@@ -13,7 +13,6 @@ const User = () => {
       return;
     }
 
-    // Simulando datos del usuario
     setUserData({ email: loggedInEmail });
     setLoading(false);
   }, []);

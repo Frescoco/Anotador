@@ -1,9 +1,5 @@
-// Importamos el Modelo
 import NotaModel from "../models/NotaModel.js";
 
-// Métodos para el CRUD
-
-// Mostrar todas las notas
 export const getAllNotas = async (req, res) => {
     try {
         const notas = await NotaModel.find();
@@ -13,7 +9,6 @@ export const getAllNotas = async (req, res) => {
     }
 };
 
-// Mostrar una nota
 export const getNota = async (req, res) => {
     try {
         const id = req.params.id;
@@ -27,14 +22,12 @@ export const getNota = async (req, res) => {
     }
 };
 
-// Crear una nota
 
 export const createNota = async (req, res) => {
     try {
-        // Agregar la fecha de creación antes de crear la nota
         const nuevaNotaData = {
             ...req.body,
-            createdAt: new Date() // Obtener la fecha y hora actual
+            createdAt: new Date() 
         };
         await NotaModel.create(nuevaNotaData);
         res.status(201).json({ message: "Nota creada correctamente" });
@@ -43,7 +36,6 @@ export const createNota = async (req, res) => {
     }
 };
 
-// Actualizar una nota
 export const updateNota = async (req, res) => {
     try {
         const id = req.params.id;
@@ -54,7 +46,6 @@ export const updateNota = async (req, res) => {
     }
 };
 
-// Archivar una nota
 export const archiveNota = async (req, res) => {
     try {
         const id = req.params.id;
@@ -65,7 +56,6 @@ export const archiveNota = async (req, res) => {
     }
 };
 
-// Desarchivar una nota
 export const unarchiveNota = async (req, res) => {
     try {
         const id = req.params.id;
@@ -76,7 +66,6 @@ export const unarchiveNota = async (req, res) => {
     }
 };
 
-// Eliminar una nota
 export const deleteNota = async (req, res) => {
     try {
         const id = req.params.id;
@@ -95,8 +84,6 @@ export const getNotasArchivadas = async (req, res) => {
     }
 }
 
-
-// Mostrar todas las notas retrasadas
 export const getNotasRetrasadas = async (req, res) => {
     try {
         const notasRetrasadas = await NotaModel.find({ retrasada: true });
@@ -106,12 +93,11 @@ export const getNotasRetrasadas = async (req, res) => {
     }
 };
 
-// Actualizar el estado de retraso de una nota
 export const setNotaRetrasada = async (req, res) => {
     try {
         const id = req.params.id;
-        const { retrasada } = req.body; // Obtener el valor de retrasada del cuerpo de la solicitud
-        await NotaModel.findByIdAndUpdate(id, { retrasada }); // Actualizar el estado de retraso de la nota
+        const { retrasada } = req.body; 
+        await NotaModel.findByIdAndUpdate(id, { retrasada });
         res.status(200).json({ message: "Estado de retraso de la nota actualizado correctamente" });
     } catch (error) {
         res.status(400).json({ message: error.message });
