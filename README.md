@@ -1,1 +1,3 @@
 Proyecto para crear,archivar y eliminar notas
+Para levantar el proyecto primero hay que instalar las dependencias abriendo dos terminales integradas, una en la carpeta "backend" y otra en "frontend" y escribir en cada una "npm install", luego para levantar el backend es necesario crear una base de datos en mongoDB Compass con una collection llamada "notas", luego abrir una terminal integrada en la carpeta "backend" y escribir en la terminar "nodemon app".
+Despues para levantar el frontend una vez instaladas las dependencias, abrir una terminal integrada en la carpeta "frontend" y escribir "npm start" con esto ya deberias tener el proyecto completo levantado.
