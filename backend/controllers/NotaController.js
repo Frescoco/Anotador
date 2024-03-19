@@ -94,3 +94,27 @@ export const getNotasArchivadas = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+
+// Mostrar todas las notas retrasadas
+export const getNotasRetrasadas = async (req, res) => {
+    try {
+        const notasRetrasadas = await NotaModel.find({ retrasada: true });
+        res.status(200).json(notasRetrasadas);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// Actualizar el estado de retraso de una nota
+export const setNotaRetrasada = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { retrasada } = req.body; // Obtener el valor de retrasada del cuerpo de la solicitud
+        await NotaModel.findByIdAndUpdate(id, { retrasada }); // Actualizar el estado de retraso de la nota
+        res.status(200).json({ message: "Estado de retraso de la nota actualizado correctamente" });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
