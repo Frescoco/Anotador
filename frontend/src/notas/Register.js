@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -7,35 +6,27 @@ const Register = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-
-  const handleRegister = async () => {
+  const handleRegister = () => {
     if (!email || !password) {
       setError('Por favor, completa todos los campos.');
+      setSuccess(false); // Restablece el éxito si hay errores
       return;
     }
 
-    if (!validateEmail(email)) {
+    // Validar el formato del correo electrónico usando una expresión regular
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)*$/;
+    if (!emailRegex.test(email)) {
       setError('Por favor, ingresa un correo electrónico válido.');
+      setSuccess(false); // Restablece el éxito si hay errores
       return;
     }
 
-    try {
-      const response = await axios.post('http://localhost:8000/users/register', {
-        email,
-        password,
-      });
-      console.log(response.data); // Maneja la respuesta según sea necesario
-      setSuccess(true); 
-    } catch (error) {
-      console.error('Error al registrar:', error);
-      setError(error.response.data.message); // Mostrar el mensaje de error del servidor
-    }
-  };
+    // Almacenar el usuario y la contraseña en localStorage
+    localStorage.setItem('registeredEmail', email);
+    localStorage.setItem('registeredPassword', password);
 
-  const validateEmail = (email) => {
-    // Expresión regular para validar el formato de correo electrónico
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    // Simulando registro exitoso
+    setSuccess(true);
   };
 
   return (
@@ -55,9 +46,9 @@ const Register = () => {
       />
       <button onClick={handleRegister}>Register</button>
       {error && <div style={{ color: 'red' }}>{error}</div>}
-      {success && (
-  <div style={{ color: 'green' }}>Usuario creado correctamente! <button onClick={() => window.location.href='/login'}>Ir al login</button></div>
-)}
+      {success && !error && (
+        <div style={{ color: 'green' }}>Usuario creado correctamente! <button onClick={() => window.location.href='/login'}>Ir al login</button></div>
+      )}
     </div>
   );
 };

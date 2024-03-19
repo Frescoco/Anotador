@@ -1,47 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Estado para controlar el inicio de sesión
 
-  useEffect(() => {
-    // Redireccionar al usuario a la página principal después del inicio de sesión exitoso
-    if (isLoggedIn) {
-      window.location.href = '/'; // Redirigir a la página principal
-    }
-  }, [isLoggedIn]); // Ejecutar useEffect cuando el valor de isLoggedIn cambie
-
-  const handleLogin = async () => {
+  const handleLogin = () => {
     if (!email || !password) {
       setError('Por favor, completa todos los campos.');
       return;
     }
-
-    try {
-      const response = await axios.post('http://localhost:8000/users/login', {
-        email,
-        password,
-      });
-      console.log(response.data);
-      setIsLoggedIn(true); // Establecer isLoggedIn en true después de iniciar sesión correctamente
-    } catch (error) {
-      console.error('Error al iniciar sesión:', error);
-      setError(error.response.data.message);
+  
+    // Verificar si el email tiene un formato válido
+    if (!validateEmail(email)) {
+      setError('Por favor, ingresa un correo electrónico válido.');
+      return;
     }
+  
+    // Verificar si el usuario existe en el almacenamiento local
+    const storedEmail = localStorage.getItem('registeredEmail');
+    const storedPassword = localStorage.getItem('registeredPassword');
+    
+    if (email !== storedEmail || password !== storedPassword) {
+      setError('El usuario o la contraseña son incorrectos.');
+      return;
+    }
+  
+    // Simulando inicio de sesión exitoso
+    localStorage.setItem('loggedInEmail', email);
+    window.location.href = '/';
   };
 
-  // Si isLoggedIn es true, muestra el mensaje de bienvenida
-  if (isLoggedIn) {
-    return (
-      <div>
-        <h2>Bienvenido</h2>
-        <p>Has iniciado sesión correctamente.</p>
-      </div>
-    );
-  }
+  // Función para validar el formato del correo electrónico
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+(\.[^\s@]+)*$/;
+    return emailRegex.test(email);
+  };
 
   // Si no se ha iniciado sesión, muestra el formulario de inicio de sesión
   return (

@@ -1,6 +1,5 @@
 // Importa el modelo de usuario y la biblioteca bcrypt
 import UserModel from '../models/UserModel.js';
-import bcrypt from 'bcrypt';
 
 // Controlador para registrar un nuevo usuario
 export const registerUser = async (req, res) => {
@@ -52,6 +51,22 @@ export const loginUser = async (req, res) => {
       res.status(200).json({ message: 'Inicio de sesión exitoso' });
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
+      res.status(500).json({ message: 'Error interno del servidor. Por favor, intenta nuevamente.' });
+    }
+  };
+  export const getUserData = async (req, res) => {
+    try {
+      const { email } = req.params; // Obtener el correo electrónico del parámetro de la URL
+      const user = await UserModel.findOne({ email }); // Buscar al usuario por su correo electrónico
+  
+      if (!user) {
+        return res.status(404).json({ message: 'Usuario no encontrado' });
+      }
+  
+      // Si el usuario es encontrado, devolverlo en la respuesta
+      res.status(200).json(user);
+    } catch (error) {
+      console.error('Error al obtener los datos del usuario:', error);
       res.status(500).json({ message: 'Error interno del servidor. Por favor, intenta nuevamente.' });
     }
   };

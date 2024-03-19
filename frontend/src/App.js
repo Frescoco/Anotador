@@ -7,6 +7,7 @@ import CompEditNota from './notas/EditNota';
 import ShowNotasArchivadas from '../src/notas/ShowNotasArchivas'; // Importa el nuevo componente
 import Register from './notas/Register'; // Importa el componente de registro
 import Login from './notas/Login'; // Importa el componente de login
+import User from './notas/User';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/archivadas" element={<ShowNotasArchivadas />} /> {/* Nueva ruta para notas archivadas */}
           <Route path="/register" element={<Register />} /> {/* Nueva ruta para el registro */}
           <Route path="/login" element={<Login />} /> {/* Nueva ruta para el login */}
+          <Route path="/user" element={<User />} /> {/* Nueva ruta para el login */}
         </Routes>
       </BrowserRouter>
     </div>
